@@ -39,4 +39,5 @@ def EMA_return(ticker):
     EMA_12 = EMA_Calc_12_Day(returns).dropna()
     EMA_5 = EMA_Calc_5_Day(returns).dropna()
     ema_total = pd.DataFrame({"EMA_26": EMA_26, "EMA_12": EMA_12, "EMA_5": EMA_5})
+    ema_total = ema_total.loc[returns.expanding().count() >= 33]
     return ema_total

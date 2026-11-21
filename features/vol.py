@@ -14,7 +14,7 @@ def load_returns(stock_ticker):
 # Return: vol df
 def vol_calc(returns):
     daily_vol = returns.rolling(20).std()
-    daily_vol = daily_vol[returns.expanding().count() >= 26]
+    daily_vol = daily_vol[returns.expanding().count() >= 33]
     return daily_vol
 # Calculates vol for ticker
 # Parameters: stock ticker

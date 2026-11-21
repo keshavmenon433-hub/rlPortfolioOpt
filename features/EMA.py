@@ -28,7 +28,7 @@ def EMA_Calc_12_Day(returns):
 # returns single column returns df
 def load_returns(stock_ticker):
     stock_data = yf.download(tickers=stock_ticker, start="2015-01-01", end= "2026-10-01", auto_adjust=False, multi_level_index=False)
-    returns = stock_data["Adj Close"].pct_change()
+    returns = np.log(stock_data["Adj Close"] / stock_data["Adj Close"].shift(1))
     return returns
 # Calculates EMA based on returns
 # Parameter: stock ticker
@@ -38,5 +38,5 @@ def EMA_return(ticker):
     EMA_26 = EMA_Calc_26_Day(returns).dropna()
     EMA_12 = EMA_Calc_12_Day(returns).dropna()
     EMA_5 = EMA_Calc_5_Day(returns).dropna()
-    ema_total = pd.DataFrame({"EMA_20": EMA_26, "EMA_12": EMA_12, "EMA_5": EMA_5})
+    ema_total = pd.DataFrame({"EMA_26": EMA_26, "EMA_12": EMA_12, "EMA_5": EMA_5})
     return ema_total
